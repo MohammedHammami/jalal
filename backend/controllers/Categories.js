@@ -25,11 +25,30 @@ const createNewCategories = (req, res) => {
       });
     });
 };
+const getAllCategories = (req,res) => {
+  pool
+  .query(`SELECT * FROM categories`)
+  .then((result) => {
+      res.status(200).json({
+        success: true,
+        mesasge: "all categories",
+        posts: result.rows
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        err: err.message,
+      });
+    });
+}
 
 
 
   
 
 module.exports = {
-    createNewCategories
+    createNewCategories,
+    getAllCategories
 };

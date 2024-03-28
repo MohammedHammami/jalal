@@ -1,4 +1,4 @@
-body {
+/* body {
   text-align: center;
 
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -24,4 +24,8 @@ color: var(--words);
   --background: pink;
 
   color: var(--words);
+} */
+
+body{
+  background-color: rgb(235, 233, 233);
 }

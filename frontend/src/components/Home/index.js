@@ -1,58 +1,58 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./index.css";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {setCategories} from "../Redux/reducers/categories"
 import { useEffect, useState } from "react";
-import posts, { setPost } from "../Redux/reducers/posts";
-import { setuserpostId } from "../Redux/reducers/comment";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardImage,
-  MDBBtn,
-} from "mdb-react-ui-kit";
-import ReactPlayer from 'react-player'
+
 const Home = () => {
-  const [page, setPage] = useState(1);
-  const [browse, setBrowse] = useState(false);
-  const [limit, setLimit] = useState(6);
-  const [nameCraft, setNameCraft] = useState("")
 
+
+  // const [page, setPage] = useState(1);
+  // const [browse, setBrowse] = useState(false);
+  // const [limit, setLimit] = useState(6);
+  // const [nameCraft, setNameCraft] = useState("")
+
+  //********************************************** */
   const navigate = useNavigate();
-
+  //********************************************** */
   const dispatch = useDispatch();
+  
   const state = useSelector((state) => {
-    console.log(state);
+    console.log(state.categories.categories);
     return {
-      posts: state.post.posts,
-      mood: state.Mood.mood,
-      totalPages: state.post.totalPages,
-      currentPage: state.post.currentPage,
-      language: state.auth.language
+      categories: state.categories.categories, 
+      
     };
   });
-  const getAllPosts = (page, limit) => {
-    
+  const getAllcategories = () => {
     axios
-      .get(`http://localhost:5000/posts?page=${page}&limit=${limit}`)
+      .get(`http://localhost:5000/categories`)
       .then((res) => {
-          
-          dispatch(setPost(res.data.posts));
-
+        dispatch(setCategories(res.data.posts));
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  useEffect(()=>{
+    getAllcategories()
+  },([]))
 
-
+  const handleClick = () => {
+    // هنا يمكنك وضع الدالة التي تريد تنفيذها عند النقر على الكائن
+  };
 
   return (
-    <>
-    </>
+    <div className="categories-container">
+       {state.categories.map((category) => (
+         <div key={category.categoryid} className="category-item" onClick={handleClick}>
+           <div className="category-name">{category.categoryname}</div>
+           <div className="category-description">{category.description}</div>
+         </div>
+       ))}
+     </div>
   );
 };
 export default Home;

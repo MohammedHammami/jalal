@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 app.use("/posts", postsRouter);
-app.use("/categories", postsRouter);
+app.use("/categories", categoriesRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
