@@ -60,7 +60,7 @@ const updatePostById = (req, res) => {
 };
 
 const getAllPostsByCategories = (req, res) => {
-  const categoryID  = req.token.userId;
+  const categoryID  = req.params.id;
   pool
   .query(`SELECT * FROM Products WHERE CategoryID = ${categoryID} AND IsActive = true`)
   .then((result) => {

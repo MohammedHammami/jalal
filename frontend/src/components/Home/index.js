@@ -40,14 +40,17 @@ const Home = () => {
     getAllcategories()
   },([]))
 
-  const handleClick = () => {
+  const handleClick = (id) => {
     // هنا يمكنك وضع الدالة التي تريد تنفيذها عند النقر على الكائن
+    navigate("/posts/3")
   };
 
   return (
     <div className="categories-container">
        {state.categories.map((category) => (
-         <div key={category.categoryid} className="category-item" onClick={handleClick}>
+         <div key={category.categoryid} className="category-item" onClick={()=>{
+          navigate("/posts/3")
+         }}>
            <div className="category-name">{category.categoryname}</div>
            <div className="category-description">{category.description}</div>
          </div>
