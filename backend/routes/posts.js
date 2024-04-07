@@ -1,16 +1,17 @@
 const express = require("express");
+const authentication = require("../middleware/authentication");
 const {
-    getAllPostsByCategories,
-    createNewPost,
-    updatePostById,
-    hiddenPostById,
-} = require("../controllers/posts");
+    getAllProductsByCategories,
+  createNewProduct,
+  updateProductById,
+  hiddenProductById,
+} = require("../controllers/Products");
 
-const postsRouter = express.Router();
+const productsRouter = express.Router();
 
-postsRouter.get('/categories/:id',getAllPostsByCategories)
-postsRouter.post('/newPost',createNewPost)
-postsRouter.put('/update/:postId',updatePostById)
-postsRouter.put("/hidden/:id",  hiddenPostById)
+productsRouter.get('/categories/:CategorieId',getAllProductsByCategories)
+productsRouter.post('/newProduct',authentication,createNewProduct)
+productsRouter.put('/:ProductId',authentication,updateProductById)
+productsRouter.put("/hidden/:productId", authentication, hiddenProductById)
 
-module.exports = postsRouter;
+module.exports = productsRouter;

@@ -7,6 +7,7 @@ import {setCategories} from "../Redux/reducers/categories"
 import { useEffect, useState } from "react";
 
 const Home = () => {
+  
 
 
   // const [page, setPage] = useState(1);
@@ -28,7 +29,7 @@ const Home = () => {
   });
   const getAllcategories = () => {
     axios
-      .get(`http://localhost:5000/categories`)
+      .get(`http://jalal.store:5000/categories`)
       .then((res) => {
         dispatch(setCategories(res.data.posts));
       })
@@ -46,16 +47,10 @@ const Home = () => {
   };
 
   return (
-    <div className="categories-container">
-       {state.categories.map((category) => (
-         <div key={category.categoryid} className="category-item" onClick={()=>{
-          navigate("/posts/3")
-         }}>
-           <div className="category-name">{category.categoryname}</div>
-           <div className="category-description">{category.description}</div>
-         </div>
-       ))}
-     </div>
+    <div>
+
+    </div>
+
   );
 };
 export default Home;
